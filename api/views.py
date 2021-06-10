@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -24,6 +25,7 @@ from rest_framework import status
 #     return HttpResponse(final_result)
 
 class BlogView(APIView):
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         qs = Blog.objects.all()
@@ -32,6 +34,7 @@ class BlogView(APIView):
         return Response(serializer_obj.data)
 
 class SingleBlogView(APIView):
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         blog_id = request.GET.get('id')
